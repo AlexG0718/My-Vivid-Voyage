@@ -19,10 +19,13 @@ interface QueryResponse {
   rows: User[];
 }
 
-const query = async (text: string, params: (string | number)[]): Promise<QueryResponse> => {
+const query = async (
+  text: string,
+  params: (string | number)[]
+): Promise<QueryResponse> => {
   console.log('executed query', text);
   const res = await pool.query(text, params);
-  return res; 
+  return res;
 };
 
 export default {

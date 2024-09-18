@@ -14,9 +14,29 @@ const generalController = {
         // });
         return next();
     },
-    saveData: (req, res, next) => {
+    saveData: async (req, res, next) => {
         const { selectedRegion, image, caption } = req.body;
-        if ((selectedRegion && image) || caption) {
+        if (selectedRegion && (image || caption)) {
+            console.log('HIT!');
+            const values = [
+                selectedRegion,
+                image,
+                caption,
+            ];
+            const query = `INSERT INTO users (region, image, caption) VALUES ($1, $2, $3)`;
+            // try {
+            //   db.query(query, values).then(() => {
+            //     res.locals.saveData = values;
+            //     console.log('Successfully added to database');
+            //   });
+            // } catch (err) {
+            //   if (err)
+            //     return next({
+            //       log: 'An error occurred attempting to save to database',
+            //       status: 500,
+            //       message: { err: err },
+            //     });
+            // }
             return next();
         }
         else {
