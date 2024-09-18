@@ -15,7 +15,9 @@ const USMap: React.FC<USMapProps> = () => {
   // Handle hover state for UI feedback
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
-  const [visitedRegions, setVisitedRegions] = useState<string[]>([]);
+  const [visitedRegions, setVisitedRegions] = useState<
+    string[] | number | null
+  >([]);
   const [regionInfo, setRegionInfo] = useState<ReactElement>(<div></div>);
 
   // randomize color
@@ -32,9 +34,9 @@ const USMap: React.FC<USMapProps> = () => {
     await setVisitedRegions([...visitedRegions, regionId]);
     // Perform additional actions, like fetching data for the clicked state
     if (regionId % 2 == 0) {
-      return setRegionInfo(<InfoContainer selectedRegion={selectedRegion} />);
+      return setRegionInfo(<InfoContainer selectedRegion={regionName} />);
     } else {
-      return setRegionInfo(<VisitedForm region={selectedRegion} />);
+      return setRegionInfo(<VisitedForm selectedRegion={regionName} />);
     }
   };
 
@@ -61,7 +63,7 @@ const USMap: React.FC<USMapProps> = () => {
                   <Geography
                     key={regionId}
                     geography={geo}
-                    onMouseEnter={(e: React.MouseEvent) => setHoveredRegion(e)}
+                    onMouseEnter={() => setHoveredRegion(regionName)}
                     onMouseLeave={() => setHoveredRegion(null)}
                     onClick={() => onRegionClick(regionId, regionName)}
                     style={{
