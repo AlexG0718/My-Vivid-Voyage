@@ -42,7 +42,7 @@ const USMap: React.FC<USMapProps> = () => {
 
   return (
     <div>
-      <ComposableMap projection='geoAlbersUsa'>
+      <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
@@ -53,7 +53,7 @@ const USMap: React.FC<USMapProps> = () => {
                 <Geography
                   key={regionId}
                   geography={geo}
-                  onMouseEnter={() => setHoveredRegion(regionName)}
+                  onMouseEnter={(e: React.MouseEvent) => setHoveredRegion(e)}
                   onMouseLeave={() => setHoveredRegion(null)}
                   onClick={() => onRegionClick(regionId, regionName)}
                   style={{
