@@ -37,6 +37,11 @@ app.get('/db', generalController.getData, (req: Request, res: Response) => {
   res.status(200).send(res.locals.getData);
 });
 
+app.post('/db', generalController.saveData, (req: Request, res: Response) => {
+  console.log('HIT! /db');
+  res.status(200).send(res.locals.saveData);
+});
+
 app.use('/', (_req, res) => {
   res.status(404).send('Error page not found!');
 });
